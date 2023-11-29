@@ -7,6 +7,27 @@ from pydocx import PyDocX
 from bs4 import BeautifulSoup
 
 
+def replace_backslash(docx_file, output_file):
+    # 打开docx文档
+    doc = Document(docx_file)
+
+    # 遍历文档中的段落
+    for paragraph in doc.paragraphs:
+        # 替换段落中的反斜杠
+        paragraph.text = paragraph.text.replace("\\", "<backslash>")
+
+    # 遍历文档中的表格
+    for table in doc.tables:
+        for row in table.rows:
+            for cell in row.cells:
+                # 替换表格单元格中的反斜杠
+                cell.text = cell.text.replace("\\", "<backslash>")
+
+    # 保存修改后的文档
+    doc.save(output_file)
+    return None
+
+
 def convert_docx(docx_file):
     html_content = PyDocX.to_html(docx_file)
     soup = BeautifulSoup(html_content, 'html.parser')
@@ -44,7 +65,7 @@ def replace_img_tags(html_content):
     for img_count, img_tag in enumerate(img_tags, start=1):
         replacement = content.new_tag('span')
         replacement.string = r'\begin{figure}' + '\n' + r'\centering' + '\n' + \
-            f'\\includegraphics[keepaspectratio]{{\\figure\\image_{img_count}.png}}' + \
+            f'<backslash>includegraphics[keepaspectratio]{{<backslash>figure<backslash>image_{img_count}.png}}' + \
             '\n' + r'\end{figure}'
         img_tag.replace_with(replacement)
 
@@ -55,7 +76,7 @@ def replace_img_tags(html_content):
 def replace_span_tags(html_content):
     pattern1 = re.compile(r'<span style="color:(.*?)">(.*?)</span>', re.DOTALL)
     pattern2 = re.compile(r'<span.*?>(.*?)</span>', re.DOTALL)
-    html_content = pattern1.sub(r'\\textcolor{\1}{\2}', html_content)
+    html_content = pattern1.sub(r'<backslash>textcolor{\1}{\2}', html_content)
     html_content = pattern2.sub(r'\1', html_content)
     return html_content
 
@@ -65,7 +86,7 @@ def replace_hyperlink_tags(html_content):
     pattern2 = re.compile(r'<a href="#footnote(.*?)".*?>(.*?)</a>', re.DOTALL)
     pattern3 = re.compile(r'<a.*?>(.*?)</a>', re.DOTALL)
     html_content = pattern1.sub(r'', html_content)
-    html_content = pattern2.sub(r'\\footnote{\2}', html_content)
+    html_content = pattern2.sub(r'<backslash>footnote{\2}', html_content)
     html_content = pattern3.sub(r'\1', html_content)
     return html_content
 
@@ -112,6 +133,7 @@ def convert_table(html_content):
 
 
 def convert_docx_to_html(docx_file):
+    replace_backslash(docx_file,docx_file)
     html_content = convert_docx(docx_file)
     html_content = convert_table(html_content)
     html_content = replace_img_tags(html_content)
