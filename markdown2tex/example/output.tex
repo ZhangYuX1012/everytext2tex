@@ -1,0 +1,159 @@
+\documentclass[UTF-8]{article}
+
+\usepackage{ctex}
+\usepackage{array}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{ulem}
+
+
+\begin{document}
+
+
+\part{Markdown 规范模板}
+
+\section{文本样式}
+
+\begin{itemize}
+
+    \item \textbf{加粗文本}: \textbf{这是加粗的文本}
+    \item \textit{斜体文本}: \textit{这是斜体的文本}
+    \item \sout{删除文本}：\sout{这是删除的文本}
+
+\end{itemize}
+
+\section{列表}
+
+\subsection{有序列表}
+
+\begin{enumerate}
+
+    \item 第一项
+    \item 第二项
+    \item 第三项
+
+\end{enumerate}
+
+\subsection{无序列表}
+
+\begin{itemize}
+
+    \item 项目一
+    \item 项目二
+    \item 项目三
+
+\end{itemize}
+
+\section{字号大小}
+
+\footnotesize{小号字体} 
+{正常字体} 
+\Large{大号字体}
+
+\section{字体颜色}
+
+\textcolor{red}{红色文本} 
+\textcolor{green}{绿色文本} 
+\textcolor{blue}{蓝色文本}
+
+\section{表格}
+
+\begin{table}[!htbp]
+%\caption{}
+\centering
+\begin{tabular}{*3{c}}
+\toprule
+
+
+  列1 & 列2 & 列3 \\ 
+
+
+\midrule
+
+
+  1 & A & X \\ 
+
+
+  2 & B & Y \\ 
+
+
+  3 & C & Z \\ 
+
+
+\bottomrule
+
+
+\end{tabular}
+\end{table}
+
+\section{插入图片}
+
+\begin{figure}
+\centering
+\includegraphics[keepaspectratio]{地址.jpg}
+\caption{图片描述}
+\end{figure}
+
+\section{居中}
+
+\begin{centering}
+ 这是一段文字 
+\end{centering} 
+
+\section{公式}
+
+\subsection{矩阵 }
+
+$$
+\begin{vmatrix}
+\frac{\partial f_1}{\partial x_1} & \frac{\partial f_1}{\partial x_2} & \ldots & \frac{\partial f_1}{\partial x_n} \\
+\frac{\partial f_2}{\partial x_1} & \frac{\partial f_2}{\partial x_2} & \ldots & \frac{\partial f_2}{\partial x_n} \\
+\vdots & \vdots & \ddots & \vdots \\
+\frac{\partial f_n}{\partial x_1} & \frac{\partial f_n}{\partial x_2} & \ldots & \frac{\partial f_n}{\partial x_n} \\
+\end{vmatrix}
+$$
+
+\subsection{分段函数}
+
+$$
+f(x,y)=\begin{cases}
+        \frac{1}{A}&(x,y)\in D \\
+        0&others
+     \end{cases}
+$$
+
+\subsection{多行公式}
+
+$$
+\begin{aligned}
+  P(x_2=1)=&\frac{m}{n}\cdot \frac{m-1}{n-1}+\frac{n-m}{n}\cdot \frac{m}{n-1}\\
+  &=\frac{m^2-m+nm-m^2}{n(n-1)}\\
+  &=\frac{m}{n}
+\end{aligned}
+$$
+\textbf{\textit{注}}：公式中的\\后面请紧跟换行符\n
+否则转化时可能出现\丢失的情况
+
+\section{代码块}
+\begin{lstlisting}[语言]
+这是一段代码块
+
+\end{lstlisting}
+
+\textbf{\textit{注}}：在使用md中代码块时要符合两个```之间填写代码内容的格式
+否则可能无法正确识别代码块
+
+\section{引用}
+
+\begin{quote}
+
+  这
+  是
+  一
+  段
+  文字
+\end{quote}
+
+
+
+\end{document}
