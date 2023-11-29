@@ -191,7 +191,7 @@ def convert_html_tags_to_tex(html_content):
     tex_content = re.sub(
         r'</li>|<p>|</p>', '', tex_content)
     tex_content = re.sub(
-        r'<span>|</span>|</head>|<head>|</ul>|</ol>|<div>|</div>|<br />|<th>|</tr>|<tr>|<hr/>', '', tex_content)
+        r'</thead>|<thead>|<table.*?>|<br/>|<span>|</span>|</head>|<head>|</ul>|</ol>|<div>|</div>|<br />|<th>|</tr>|<tr>|<hr/>', '', tex_content)
     tex_content = re.sub(r'<ol.*?>', '', tex_content)
     tex_content = re.sub(r'<thead>', '', tex_content)
     tex_content = re.sub(r'([^\\])\\\s*\n', r'\1\\\\\n', tex_content)
@@ -201,7 +201,7 @@ def convert_html_tags_to_tex(html_content):
 
 def remove_multiple_blank_lines(html_content):
     # 使用正则表达式匹配两个及以上的空行，并替换为空行
-    tex_content = re.sub(r'\n\s*\n\s*\n*', '\n\n', html_content)
+    tex_content = re.sub(r'\n\s*\n\s*\n*', '\n', html_content)
     return tex_content
 
 def convert_html_to_tex(html_content):
@@ -218,6 +218,6 @@ def convert_html_to_tex(html_content):
     tex_content = convert_lists_to_tex(tex_content)
     tex_content = convert_table_to_tex(tex_content)
     tex_content = convert_html_tags_to_tex(tex_content)
-    tex_content = remove_multiple_blank_lines(tex_content)
     tex_content = html.unescape(tex_content)
+    tex_content = remove_multiple_blank_lines(tex_content)
     return tex_content
