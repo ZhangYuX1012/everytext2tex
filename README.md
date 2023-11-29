@@ -30,4 +30,8 @@ A Simple Tool for Markdown and DocX to Latex Conversion
 
 ***todo:*** 
 1. 自动化docx公式转化成latex格式
+<<<<<<< HEAD
 2. 完善docx中更多格式的转化
+=======
+2. 完善docx中更多格式的转化
+>>>>>>> 898d237a5dc539c7ae9232ba1f65c3f9aa4575da
